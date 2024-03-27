@@ -84,6 +84,7 @@ import pyspark.sql.functions as F
 
 preds_and_labels = predictions.select(['prediction','labelIndex']).withColumn('labelIndex', F.col('labelIndex').cast(FloatType())).orderBy('prediction')
 preds_and_labels = preds_and_labels.select(['prediction','labelIndex'])
+print("\n")
 print(preds_and_labels)
 metrics = MulticlassMetrics(preds_and_labels.rdd.map(tuple))
 print(metrics.confusionMatrix().toArray())
